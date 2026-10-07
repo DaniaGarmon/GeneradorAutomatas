@@ -3,6 +3,7 @@ import simbolo
 import automata
 import re
 import pandas as pd
+import exp_regular
 
 EPSILON = "ε"
 VACIO = "∅"
@@ -178,7 +179,6 @@ if "config" in st.session_state:
 
             st.write("Tipo detectado:", automata_actual.tipo())
 
-            # ---------------- NFA: cerraduras y conversión ----------------
             if automata_actual.tipo() == "NFA":
 
                 if automata_actual.cerraduras:
@@ -349,4 +349,19 @@ if "config" in st.session_state:
                     st.subheader("Ecuaciones de transiciones entrantes")
                     st.code("\n".join(dfa_minimo_mostrar.formatear_ecuaciones()), language=None)
                     
+                    st.subheader("Expresión regular")
+
+                    expresion = exp_regular.automata_a_regex(
+                        dfa_minimo_mostrar
+                    )
+
+                    #st.write("Expresión obtenida:")
+                    #st.code(str(expresion))
                     
+                    regex_simplificada = exp_regular.simplificar_regex(
+                        expresion
+                    )
+
+                    st.write("Expresión simplificada:")
+                    regex_simplificada = regex_simplificada.replace("$", "")
+                    st.code(regex_simplificada)

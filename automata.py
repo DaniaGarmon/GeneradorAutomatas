@@ -1,5 +1,4 @@
 EPSILON = "ε"
-
 class Automata:
 
     def __init__(
