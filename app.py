@@ -355,17 +355,14 @@ with tab_tabla:
                         st.code("\n".join(dfa_minimo_mostrar.formatear_ecuaciones()), language=None)
                         
                         
-                  
+            
                         
                         st.subheader("Expresión regular")
-
-                        expresion = exp_regular_prueba.automata_a_regex(
-                            dfa_minimo_mostrar
-                        )
-
-                        
-                        
-                        st.code(str(expresion))
+                        obtenida, simplificada = exp_regular_prueba.mejor_regex(dfa_minimo_mostrar)
+                        st.write("Expresión obtenida:")
+                        st.code(obtenida if obtenida is not None else "∅")
+                        st.write("Expresión simplificada:")
+                        st.code(simplificada if simplificada is not None else "∅")
 
 with tab_er:
     with st.container(key="in_er"):
@@ -524,9 +521,10 @@ with tab_er:
                 st.code("\n".join(dfa_minimo_mostrar.formatear_ecuaciones()), language=None)
 
                 st.subheader("Expresión regular")
-
-                expresion = exp_regular_prueba.automata_a_regex(dfa_minimo_mostrar)
-
-                st.code(str(expresion))
+                obtenida, simplificada = exp_regular_prueba.mejor_regex(dfa_minimo_mostrar)
+                st.write("Expresión obtenida:")
+                st.code(obtenida if obtenida is not None else "∅")
+                st.write("Expresión simplificada:")
+                st.code(simplificada if simplificada is not None else "∅")
       
         
